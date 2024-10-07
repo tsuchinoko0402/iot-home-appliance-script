@@ -5,6 +5,7 @@ name = "pypi"
 
 [scripts]
 receive_data = "python app/receive_data_regularly.py"
+test = "pytest"
 
 [packages]
 logging = "*"
