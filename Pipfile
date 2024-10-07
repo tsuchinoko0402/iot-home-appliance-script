@@ -10,6 +10,7 @@ receive_data = "python app/receive_data_regularly.py"
 logging = "*"
 python-dotenv = "*"
 requests = "*"
+pytest = "*"
 
 [dev-packages]
 
