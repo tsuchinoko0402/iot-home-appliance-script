@@ -6,16 +6,19 @@ name = "pypi"
 [scripts]
 receive_data = "python app/receive_data_regularly.py"
 test = "pytest"
+ccn = "lizard -l python"
+ccn_html = "lizard -l python -Tcyclomatic_complexity=20 -Tnloc=500 -Tparameter_count=7 --html > html/ccn/lizard_result.html"
 
 [packages]
 logging = "*"
 python-dotenv = "*"
 requests = "*"
-pytest = "*"
-lizard = "*"
 
 [dev-packages]
 ruff = "*"
+jinja2 = "*"
+lizard = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.12"
