@@ -1,5 +1,5 @@
 import dataclasses
-from enum import Enum
+from enum import Enum, StrEnum, auto
 
 class DeviceType(Enum):
     """SwitchBot のデバイスタイプを表す列挙型
@@ -27,6 +27,13 @@ class RemoteType(Enum):
     OTHERS = "Others"
 
 
+class CurtainOpenDirection(StrEnum):
+    """SwitchBot カーテンの開く方向を示す列挙型
+    """
+    LEFT = auto()
+    RIGHT = auto()
+
+
 @dataclasses.dataclass
 class BaseDevice:
     """SwitchBot で扱うデバイス・リモコンの基底クラス
@@ -42,6 +49,18 @@ class Device(BaseDevice):
     """
     deviceType: DeviceType
     enableCloudService: bool
+
+
+@dataclasses.dataclass
+class CurtainDevice(Device):
+    """SwitchBot のカーテンを表すクラス
+    """
+    curtainDevicesIds: list[str]
+    calibrate: bool
+    group: bool
+    master: bool
+    openDirection: CurtainOpenDirection
+
 
 @dataclasses.dataclass
 class InfraredRemote:
