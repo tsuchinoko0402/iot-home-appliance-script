@@ -6,6 +6,7 @@ import hmac
 from typing import Any
 import uuid
 
+
 @dataclasses.dataclass(frozen=True)
 class SwitchBotApiHeader:
     """Switch Bot API v1.1 を叩く際に付ける HTTP リクエストヘッダー
@@ -13,19 +14,28 @@ class SwitchBotApiHeader:
     API を利用する際に必要な認証情報については API の公式ドキュメントを参照
     https://github.com/OpenWonderLabs/SwitchBotAPI?tab=readme-ov-file#authentication
     """
+
     authorization: str
     secret: str
-    contentType: str = 'application/json'
-    charset: str = 'utf-8'
+    contentType: str = "application/json"
+    charset: str = "utf-8"
     t: int = int(round(time.time() * 1000))
-    sign: bytes = b''
+    sign: bytes = b""
     nonce: str = str(uuid.uuid4())
 
     def __post_init__(self):
         string_to_sign = f"{self.authorization}{self.t}{self.nonce}"
         string_to_sign = bytes(string_to_sign, "utf-8")
         secret_byte = bytes(self.secret, "utf-8")
-        object.__setattr__(self, "sign", base64.b64encode(hmac.new(secret_byte, msg=string_to_sign, digestmod=hashlib.sha256).digest()))
+        object.__setattr__(
+            self,
+            "sign",
+            base64.b64encode(
+                hmac.new(
+                    secret_byte, msg=string_to_sign, digestmod=hashlib.sha256
+                ).digest()
+            ),
+        )
 
 
 def create_api_header(token: str, secret: str) -> dict[str, str]:
