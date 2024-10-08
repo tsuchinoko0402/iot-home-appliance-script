@@ -6,7 +6,7 @@ import json
 
 import requests
 
-from switchbot.lib.api_setting import create_api_header
+from lib.switchbot.api_setting import create_api_header
 
 # 環境変数設定
 load_dotenv(verbose=True)

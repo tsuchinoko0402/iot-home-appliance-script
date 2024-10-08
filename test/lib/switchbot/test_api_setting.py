@@ -1,5 +1,5 @@
 import time
-from app.switchbot.lib.api_setting import create_api_header
+from app.lib.switchbot.api_setting import create_api_header
 import uuid
 import pytest
 
