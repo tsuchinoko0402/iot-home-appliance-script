@@ -12,6 +12,7 @@ logging = "*"
 python-dotenv = "*"
 requests = "*"
 pytest = "*"
+lizard = "*"
 
 [dev-packages]
 ruff = "*"
