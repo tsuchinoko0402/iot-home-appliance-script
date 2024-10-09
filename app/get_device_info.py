@@ -15,7 +15,6 @@ load_dotenv(dotenv_path)
 
 TOKEN = os.environ.get("SWITCHBOT_TOKEN")
 SECRET = os.environ.get("SWITCHBOT_SECRET")
-GAS_URL = os.environ.get("GAS_URL")
 APP_HOME = os.environ.get("APP_HOME")
 
 # ロギングの設定
@@ -31,19 +30,9 @@ def main():
     header = create_api_header(token=TOKEN, secret=SECRET)
     logger.debug(header)
 
-    response = requests.get(
-        "https://api.switch-bot.com/v1.1/devices/CA3234352A7A/status",
-        headers=header,
-    )
+    response = requests.get("https://api.switch-bot.com/v1.1/devices", headers=header)
     devices = response.json()
     logger.debug(devices)
-    temp = devices["body"]["temperature"]
-    hum = devices["body"]["humidity"]
-
-    url = f"{GAS_URL}?t={temp}&h={hum}"
-    response = requests.get(url)
-    logger.debug(response)
-
     logger.info("Finished")
 
 
