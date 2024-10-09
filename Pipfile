@@ -14,6 +14,8 @@ ccn_html = "lizard -l python -Tcyclomatic_complexity=20 -Tnloc=500 -Tparameter_c
 logging = "*"
 python-dotenv = "*"
 requests = "*"
+google-auth = "*"
+gspread = "*"
 
 [dev-packages]
 ruff = "*"
