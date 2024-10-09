@@ -5,6 +5,7 @@ name = "pypi"
 
 [scripts]
 receive_data = "python app/receive_data_regularly.py"
+get_device_info = "python app/get_device_info.py"
 test = "pytest"
 ccn = "lizard -l python"
 ccn_html = "lizard -l python -Tcyclomatic_complexity=20 -Tnloc=500 -Tparameter_count=7 --html > html/ccn/lizard_result.html"
