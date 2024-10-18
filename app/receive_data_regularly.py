@@ -40,16 +40,22 @@ logger = getLogger(__name__)
 
 
 def __get_meter_info(device_id: str) -> tuple[str, str, str]:
-    header = create_api_header(token=TOKEN, secret=SECRET)
+    logger.info("Started")
 
+    header = create_api_header(token=TOKEN, secret=SECRET)
     res = requests.get(
         f"https://api.switch-bot.com/v1.1/devices/{device_id}/status",
         headers=header,
     )
     info = res.json()
+    logger.debug(f"info: {info}")
+
     now = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y-%m-%d %H:%M:%S")
     temp = info["body"]["temperature"]
     hum = info["body"]["humidity"]
+    logger.debug(f"id: {device_id}, time: {now}, temp: {temp}, hum: {hum}")
+    logger.info("Finished")  
+
     return (now, temp, hum)
 
 
