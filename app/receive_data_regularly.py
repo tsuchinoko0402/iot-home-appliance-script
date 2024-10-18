@@ -66,11 +66,16 @@ def main():
     logger.debug(header)
 
     entrance_info = __get_meter_info(DEVICE_ID_ENTRANCE_THERMOMETER)
+    living_info = __get_meter_info(DEVICE_ID_LIVING_THERMOMETER)
 
     gspreadsheet = getGoogleSpreadSheet(spread_sheet_id=GSPREAD_SHEET_KEY, credential_file_path=GOOGLE_CREDENTIAL_FILE_PATH)
-    worksheet = gspreadsheet.worksheet(SHEET_NAME_ENTRANCE)
-    worksheet.append_row([entrance_info[0], entrance_info[1], entrance_info[2]])
-    logger.debug(worksheet.get_all_values())
+    worksheet_entrance = gspreadsheet.worksheet(SHEET_NAME_ENTRANCE)
+    worksheet_living = gspreadsheet.worksheet(SHEET_NAME_LIVING)
+    worksheet_entrance.append_row([entrance_info[0], entrance_info[1], entrance_info[2]])
+    worksheet_living.append_row([living_info[0], living_info[1], living_info[2]])
+   
+    logger.debug(worksheet_entrance.get_all_values())
+    logger.debug(worksheet_living.get_all_values())
 
     logger.info("Finished")
 
