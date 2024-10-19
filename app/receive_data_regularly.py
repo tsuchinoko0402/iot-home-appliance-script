@@ -50,13 +50,15 @@ def __get_meter_info(device_id: str) -> tuple[str, str, str]:
     info = res.json()
     logger.debug(f"info: {info}")
 
-    now = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now(ZoneInfo("Asia/Tokyo"))
+    date = now.strftime("%Y-%m-%d")
+    time = now.strftime("%H:%M:%S")
     temp = info["body"]["temperature"]
     hum = info["body"]["humidity"]
-    logger.debug(f"id: {device_id}, time: {now}, temp: {temp}, hum: {hum}")
+    logger.debug(f"id: {device_id}, date: {date}, time: {time}, temp: {temp}, hum: {hum}")
     logger.info("Finished")  
 
-    return (now, temp, hum)
+    return (date, time, temp, hum)
 
 
 def main():
@@ -71,8 +73,8 @@ def main():
     gspreadsheet = getGoogleSpreadSheet(spread_sheet_id=GSPREAD_SHEET_KEY, credential_file_path=GOOGLE_CREDENTIAL_FILE_PATH)
     worksheet_entrance = gspreadsheet.worksheet(SHEET_NAME_ENTRANCE)
     worksheet_living = gspreadsheet.worksheet(SHEET_NAME_LIVING)
-    worksheet_entrance.append_row([entrance_info[0], entrance_info[1], entrance_info[2]])
-    worksheet_living.append_row([living_info[0], living_info[1], living_info[2]])
+    worksheet_entrance.append_row([entrance_info[0], entrance_info[1], entrance_info[2], entrance_info[3]])
+    worksheet_living.append_row([living_info[0], living_info[1], living_info[2],  living_info[3]])
    
     logger.debug(worksheet_entrance.get_all_values())
     logger.debug(worksheet_living.get_all_values())
