@@ -45,7 +45,6 @@ def main():
     logger.debug(header)
 
     response = requests.get("https://api.switch-bot.com/v1.1/devices", headers=header)
-    # response = requests.get("https://api.switch-bot.com/v1.1/devices/C1163DE60941/status", headers=header)
 
     devices = response.json()
     logger.debug(devices)
