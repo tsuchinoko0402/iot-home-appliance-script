@@ -53,7 +53,17 @@ def main():
     now = datetime.now(ZoneInfo("Asia/Tokyo"))
 
     ws.update_acell('B1', now.strftime('%Y/%m/%d %H:%M:%S'))
-
+    device_list = [info for info in devices['body']['deviceList']]
+    logger.info(device_list)
+    device_info_list = [
+        (device['deviceId'], device['deviceName'], device['hubDeviceId'], device['deviceType']) for device in 
+        [
+            info for info in devices['body']['deviceList']
+        ]
+    ]
+    
+    logger.info(device_info_list)
+    
     logger.info("Finished")
 
 
